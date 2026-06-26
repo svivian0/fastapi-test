@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 
+#this create a route and add a prefix and a tag
 auth_router = APIRouter(prefix="/auth", tags=["auth"])
 
 
