@@ -90,12 +90,7 @@ O FastAPI gera automaticamente duas interfaces de documentação interativa para
 
 ---
 
-## 🎯 Próximos Passos (Estudos)
+## Base
+Esse projeto está usando como base o curso gratuito no youtube da [Hashtag Programação](https://www.youtube.com/@HashtagProgramacao) sobre FastAPI, link do curso - [fastapi](https://www.youtube.com/watch?v=kI8uXm0W9eU&t=845s)
 
-Para expandir este projeto de aprendizado, os seguintes tópicos estão planejados:
-1. **Configuração do Banco de Dados com SQLAlchemy:** Implementar a conexão com o banco de dados, definição da engine e do `sessionmaker`.
-2. **Criação de Modelos (Models):** Definir as tabelas de banco de dados (ex: `User`, `Order`) usando a base declarativa do SQLAlchemy.
-3. **Esquemas com Pydantic (Schemas/Serializers):** Utilizar Pydantic para validação e serialização de dados de entrada e saída.
-4. **Operações de CRUD:** Implementar a criação, leitura, atualização e exclusão de registros no banco de dados.
-5. **Autenticação e Segurança:** Implementar segurança com JWT (JSON Web Tokens) e hash de senhas de usuários.
-6. **Migrações com Alembic:** Gerenciar o versionamento do banco de dados.
+
