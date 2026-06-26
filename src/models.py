@@ -1,11 +1,17 @@
+import os
 from sqlalchemy import create_engine, Column, String, Integer, Boolean, Float, ForeignKey #permite conectar uma tabela em outras #import the columns and the types of then
 from sqlalchemy.orm import declarative_base
-from sqlalchemy_utils import ChoiceType #permite passar apenas opções especificas para uma coluna
+# from sqlalchemy_utils import ChoiceType #permite passar apenas opções especificas para uma coluna
 
 
 ##BASE STRUCTURE
 #create the conection of db
-db = create_engine("sqlite:///../data/database.db")
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DB_PATH = os.path.join(BASE_DIR, "data", "database.db")
+# Garante que a pasta 'data' exista
+os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
+
+db = create_engine(f"sqlite:///{DB_PATH}")
 
 
 #create the base of db
@@ -32,7 +38,7 @@ class user(base):  ## in SQLAlchemy a class turn a table
 class order(base):
     __tablename__ = "orders"
     id = Column("id", Integer, primary_key=True, nullable=False, autoincrement=True) #primary key torna esse pedido unico
-    status= Column("status", ChoiceType([("PRONTO", "PRONTO"), ("PENDENTE", "PENDENTE"), ("CANCELADO", "CANCELADO")]), default="PENDENTE") # ChoiceType is like a restriction
+    status= Column("status", String, default="PENDENTE") # ChoiceType is like a restriction, but dont work with alembic
     user_id= Column("user_id", ForeignKey("users.id"))#transforma o valor de user_id no id da tabela estrangeira users
     datetime= Column("datetime", String)
     price= Column("price", Float, nullable=False)
@@ -50,7 +56,7 @@ class items_order(base):
     amount = Column("amount", Integer, default=0)
     price = Column("price", Float, nullable=False)
     topping = Column("topping", String(150), nullable=False)
-    size = Column("size", ChoiceType([("SMALL", "SMALL"), ("MEDIUM", "MEDIUM"), ("LARGE", "LARGE")]), default="MEDIUM")
+    size = Column("size", String, default="MEDIUM")
 
     def __init__(self, order_id, amount, price, topping, size):
         self.order_id = order_id

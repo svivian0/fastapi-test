@@ -25,7 +25,10 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-from src.models import base ##busca a models em /src -- só é possivel pelo sys.path acima
+from src.models import base, db ##busca a models em /src -- só é possivel pelo sys.path acima
+
+# Configura dinamicamente a URL de conexão para usar o mesmo caminho absoluto de models.py
+config.set_main_option("sqlalchemy.url", str(db.url))
 
 target_metadata = base.metadata ##add os metadados da base
 # other values from the config, defined by the needs of env.py,
